@@ -133,7 +133,18 @@ left: 45%;
 <script type="module">
 import { Fireworks } from '/hanabi/firework-js/index.es.js';
 const fc = document.querySelector('.fireworks-container');
-const fireworks = new Fireworks(fc, { /* options */ });
+const fireworks = new Fireworks(fc, { sound: {
+    enabled: true,
+    files: [
+      location.href + 'sounds/explosion0.mp3',
+      location.href + 'sounds/explosion1.mp3',
+      location.href + 'sounds/explosion2.mp3'
+    ],
+    volume: {
+      min: 6,
+      max: 6
+    }
+  } });
 fireworks.start();
 
 const queryString = window.location.search;
