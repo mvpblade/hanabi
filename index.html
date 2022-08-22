@@ -1,72 +1,147 @@
-<style>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+	<style>
+body {
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI',
+    'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  line-height: 1;
+  user-select: none;
+  overscroll-behavior: none;
+}
 
+.container {
+  position: fixed;
+  width: 240px;
+  height: inherit;
+  background: hsla(0, 0%, 10%, 1);
+  top: 50%;
+  left: 50%;
+  margin: -120px 0 0 -120px;
+  padding: 20px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 20px;
+  z-index: 1;
+  opacity: 0.9;
+  line-height: initial;
+}
+
+.container div {
+  text-align: center;
+  font-size: 3rem;
+}
+
+.container h1 {
+  font-size: 1.8em;
+  text-align: center;
+  color: #ffffff;
+  margin: 0;
+}
+
+.container h2 {
+  font-weight: 400;
+  font-size: 16px;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.container a {
+  width: 100%;
+  text-align: center;
+  line-height: 36px;
+  background: #ffffff;
+  margin-top: 10px;
+  color: #222;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 500;
+  transition-duration: 0.1s;
+  text-decoration: none;
+}
+
+.container a:hover {
+  transition: ease-in color;
+  background: #222;
+  color: hsla(0, 0%, 70%, 1);
+}
+
+.fireworks-container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000;
+}
+
+.fireworks-container > canvas {
+  cursor: crosshair;
+}
+
+:root {
+  --tp-base-background-color: hsla(0, 0%, 0%, 0.75);
+  --tp-base-shadow-color: hsla(0, 0%, 0%, 0.2);
+  --tp-button-background-color: hsla(0, 0%, 70%, 1);
+  --tp-button-background-color-active: hsla(0, 0%, 85%, 1);
+  --tp-button-background-color-focus: hsla(0, 0%, 80%, 1);
+  --tp-button-background-color-hover: hsla(0, 0%, 75%, 1);
+  --tp-button-foreground-color: hsla(0, 0%, 0%, 1);
+  --tp-container-background-color: hsla(0, 0%, 10%, 1);
+  --tp-container-background-color-active: hsla(0, 0%, 25%, 1);
+  --tp-container-background-color-focus: hsla(0, 0%, 20%, 1);
+  --tp-container-background-color-hover: hsla(0, 0%, 15%, 1);
+  --tp-container-foreground-color: hsla(0, 0%, 50%, 1);
+  --tp-groove-foreground-color: hsla(0, 0%, 10%, 1);
+  --tp-input-background-color: hsla(0, 0%, 10%, 1);
+  --tp-input-background-color-active: hsla(0, 0%, 25%, 1);
+  --tp-input-background-color-focus: hsla(0, 0%, 20%, 1);
+  --tp-input-background-color-hover: hsla(0, 0%, 15%, 1);
+  --tp-input-foreground-color: hsla(0, 0%, 70%, 1);
+  --tp-label-foreground-color: hsla(0, 0%, 50%, 1);
+  --tp-monitor-background-color: hsla(0, 0%, 8%, 1);
+  --tp-monitor-foreground-color: hsla(0, 0%, 48%, 1);
+}
+
+:root .tp-dfwv {
+  padding-bottom: 8px;
+  width: 350px !important;
+  z-index: 1;
+}
+.container {
+background: none;
+color:yellow;
+font-size: 48px;
+font-weight: bold;
+width: inherit;
+left: 45%;
+}
 </style>
+  </head>
+  <body>
 
-<script type="module" src="/firework-js/index.cjs.js" crossorigin="anonymous"></script>
+<div class="container">
+</div>
+<div class="fireworks-container"></div>
 
-<script>
+
+<script type="module">
+import { Fireworks } from '/hanabi/firework-js/index.es.js';
+const fc = document.querySelector('.fireworks-container');
+const fireworks = new Fireworks(fc, { /* options */ });
+fireworks.start();
+
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+
+const c = document.querySelector('.container');
+c.innerHTML = urlParams.get("msg");
 </script>
 
-<h2 style="color:white;">JJ，請協助一下</h2>
-<div class="fireworks-example"></div>
-
-
-<script>
-  const container = document.querySelector('..fireworks-example');
-const fireworks = new Fireworks(container, {
-      rocketsPoint: {
-        min: 50,
-        max: 50
-      },
-      hue: {
-        min: 0,
-        max: 360
-      },
-      delay: {
-        min: 0.015,
-        max: 0.03
-      },
-      lineWidth: {
-        explosion: {
-          min: 1,
-          max: 3
-        },
-        trace: {
-          min: 1,
-          max: 2
-        }
-      },
-      lineStyle: 'round',
-      speed: 2,
-      acceleration: 1.05,
-      friction: 0.95,
-      gravity: 1.5,
-      particles: 50,
-      trace: 3,
-      flickering: 50,
-      opacity: 0.5,
-      explosion: 5,
-      intensity: 30,
-      traceSpeed: 10,
-      autoresize: true,
-      brightness: { 
-        min: 50, 
-        max: 80
-      },
-      decay = {
-        min: 0.015,
-        max: 0.03
-      },
-      mouse: { 
-        click: false, 
-        move: false, 
-        max: 1 
-      }
-      boundaries: { 
-        x: 50, 
-        y: 50, 
-        width: 0, 
-        height: 0
-      }
-});
-</script>
+  </body>
+</html>
